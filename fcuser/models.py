@@ -12,6 +12,6 @@ class Fcuser(models.Model):
   
 
     class Meta:
-        db_table='fastcampuse_fcuser'
+        db_table='fastcampuse_fcuser1'
         verbose_name='사용자'
         verbose_name_plural='사용자'
