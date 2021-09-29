@@ -18,4 +18,7 @@ def admin_required(function):
 
         user=Fcuser.objects.get(email=user)
         if user.level!='admin':
-            return redirect('/')
+            return redirect('/')      
+
+        return function(request,*args,**kwargs)
+    return wrap

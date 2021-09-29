@@ -5,7 +5,7 @@ from .models import Product
 from .forms import RegisterForm
 from order.forms import RegisterForm as OrderForm
 from django.utils.decorators import method_decorator
-from fcuser.decorators import login_required
+from fcuser.decorators import admin_required
 
 # Create your views here.
 class ProductList(ListView):
@@ -13,7 +13,7 @@ class ProductList(ListView):
     template_name='product.html'
     #context_object_name='product_list' 템플릿 파일에 object_list가 아닌 product_list로 객체를 전달할 수있다.
 
-@method_decorator(login_required,name='dispatch')
+@method_decorator(admin_required,name='dispatch')
 class ProductCreate(FormView):
     template_name='register_product1.html'
     form_class=RegisterForm
