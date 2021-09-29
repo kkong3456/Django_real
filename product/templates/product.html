@@ -3,6 +3,7 @@
 {% block contents %}
 <div class="row mt-5">
     <div class="col-12">
+        <h4>제품리스트</h4>
         <table class="table table-light">
             <thead class="thead-light">
                 <tr>
@@ -18,10 +19,10 @@
             {% for product in object_list %}
                 <tr>
                     <th scope="row">{{product.id}}</th>
-                    <th scope="row">{{product.name}}</th>
+                    <th scope="row"><a href="/product/{{product.id}}">{{product.name}}</a></th>
                     <th scope="row">{{product.price|intcomma}}원</th>
                     <th scope="row">{{product.register_date|date:'Y-m-d H:i'}}</th>
-                    <th scope="row">{{product.description}}</th>
+                    {% comment %} <th scope="row" style="width:100px;">{{product.description | safe}}</th> {% endcomment %}
                 </tr>
             {% endfor %}
             </tbody>
