@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+from django.utils.decorators import method_decorator
+from fcuser.decorators import login_required
 from django.views.generic.edit import FormView
 from .forms import RegisterForm
 from django.views.generic import ListView
@@ -7,12 +9,11 @@ from .models import Order
 
 # Create your views here.
 
+@method_decorator(login_required,name='dispatch')
 class OrderCreate(FormView):
     form_class=RegisterForm
     success_url='/product/'
     
-
-
     def form_invalid(self,form):   # 폼 전달이 실패할때.. 수량이 빈칸일때..등
         print(f'약오르지')
 
@@ -26,6 +27,7 @@ class OrderCreate(FormView):
 
         return kw
 
+@method_decorator(login_required,name='dispatch')
 class OrderList(ListView):
     template_name='order.html'
     context_object_name='order_list'
