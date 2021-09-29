@@ -8,8 +8,8 @@ class Order(models.Model):
     quantity=models.IntegerField(verbose_name='수량')
     register_date=models.DateTimeField(auto_now_add=True,verbose_name='등록날자')
 
-    def __str__(self):
-        return self.fcuser+' '+str(self.product)
+    # def __str__(self):
+    #     return self.fcuser+' '+str(self.product)
 
 
     class Meta:
