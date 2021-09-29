@@ -6,12 +6,12 @@
         <h4>제품리스트</h4>
         <table class="table table-light">
             <thead class="thead-light">
-                <tr>
+                <tr> 
                     <th scope="col">#</th>
                     <th scope="col">상품명</th>
                     <th scope="col">가격</th>
                     <th scope="col">등록날자</th>
-                    <th scope="col">설명</th>
+                    <th scope="col">재고수량</th>
 
                 </tr>
             </thead>
@@ -23,6 +23,7 @@
                     <th scope="row">{{product.price|intcomma}}원</th>
                     <th scope="row">{{product.register_date|date:'Y-m-d H:i'}}</th>
                     {% comment %} <th scope="row" style="width:100px;">{{product.description | safe}}</th> {% endcomment %}
+                    <th scope="row">{{product.stock}}개</th>
                 </tr>
             {% endfor %}
             </tbody>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12">
+        <h4>제품리스트</h4>
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr> 
+                    <th scope="col">#</th>
+                    <th scope="col">상품명</th>
+                    <th scope="col">수량</th>
+                    <th scope="cos">주문금액</th>
+                    <th scope="col">주문날자</th>
+                </tr>
+            </thead>
+            <tbody class="text-dart">
+            {% for order in order_list %}
+                <tr>
+                    <th scope="row">{{order.id}}</th>
+                    <th scope="row">{{order.product}}</th>
+                    <th scope="row">{{order.quantity}} 개</th>
+                    <th scope="row">{{order.price}} 원</th>
+                    <th scope="row">{{order.register_date|date:'Y-m-d H:i'}}</th>
+                    {% comment %} <th scope="row" style="width:100px;">{{order.description | safe}}</th> {% endcomment %}
+                   
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

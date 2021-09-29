@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.views.generic.edit import FormView
 from .forms import RegisterForm
+from django.views.generic import ListView
+from .models import Order
 
 
 # Create your views here.
@@ -8,10 +10,12 @@ from .forms import RegisterForm
 class OrderCreate(FormView):
     form_class=RegisterForm
     success_url='/product/'
+    
 
 
     def form_invalid(self,form):   # 폼 전달이 실패할때.. 수량이 빈칸일때..등
         print(f'약오르지')
+
         return redirect('/product/'+str(form.product))
 
     def get_form_kwargs(self,**kwargs):  #FormView에 있는 메소드로 인자값을 추가할때 사용함
@@ -21,4 +25,13 @@ class OrderCreate(FormView):
         })
 
         return kw
+
+class OrderList(ListView):
+    template_name='order.html'
+    context_object_name='order_list'
+
+    def get_queryset(self,**kwargs):
+        queryset=Order.objects.filter(fcuser__email=self.request.session.get('user'))
+        return queryset
+   
 
