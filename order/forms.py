@@ -28,19 +28,19 @@ class RegisterForm(forms.Form):
         #print(f'fcuser is {fcuser}')
         # print(f'self.request.session is {self.request.session}')
 
-        if quantity and product and fcuser:
-            with transaction.atomic():  # with안에 있는 것들은 transaction처리된다.
-                prod=Product.objects.get(pk=product)
+        if not(quantity and product):
+            
+            # with transaction.atomic():  # with안에 있는 것들은 transaction처리된다.
+            #     prod=Product.objects.get(pk=product)
 
-                order=Order(
-                    quantity=quantity,
-                    product=prod,
-                    fcuser=Fcuser.objects.get(email=fcuser)
-                )
-                order.save()
-                prod.stock-=quantity
-                prod.save()
-        else:
-            self.product=product
+            #     order=Order(
+            #         quantity=quantity,
+            #         product=prod,
+            #         fcuser=Fcuser.objects.get(email=fcuser)
+            #     )
+            #     order.save()
+            #     prod.stock-=quantity
+            #     prod.save()
+        
             self.add_error('quantity','값이 없습니다.')
             self.add_error('product','상품이 없습니다.')
