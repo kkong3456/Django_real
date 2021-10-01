@@ -7,7 +7,33 @@ from order.forms import RegisterForm as OrderForm
 from django.utils.decorators import method_decorator
 from fcuser.decorators import admin_required
 
+from rest_framework import generics
+from rest_framework import mixins
+from .serializers import ProductSerializer  
+
+
 # Create your views here.
+
+class ProductListAPI(generics.GenericAPIView,mixins.ListModelMixin):
+    serializer_class=ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    def get(self,request,*args,**kwargs):   #get요청시 믹스인이 자동으로 만들어준 리스트를 반환한다
+        return self.list(request,*args,**kwargs)
+
+#마우스오버시 상세보기 
+class ProductDetailAPI(generics.GenericAPIView,mixins.RetrieveModelMixin):
+    serializer_class=ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('id') # pk를 지정하여 요청이 오며(urls.py), 자동으로 해당 pk에 관한것만 가져온다.
+
+    def get(self,request,*args,**kwargs):
+        return self.retrieve(request,*args,**kwargs)
+
+        
 class ProductList(ListView):
     model=Product
     template_name='product.html'
